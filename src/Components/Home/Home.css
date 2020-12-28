@@ -1,0 +1,7 @@
+.home__image{
+    width: 100%;
+    z-index: -1;
+    margin-bottom: -150px; /* What this does -Fade in effect Whatever you will add bottom to this will appear up -150px... */
+    /* This will decrease gradient color as from  0001 to 0000*/
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) ,rgba(0,-1,0,0))
+}
