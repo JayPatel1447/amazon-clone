@@ -1,7 +1,30 @@
 import React from 'react'
 import "./Product.css"
 
-function Product({title, price, rating, image}) {
+import {useStateValue} from "../StateProvider/StateProvider"
+
+function Product({id, title, price, rating, image}) {
+
+    //Destructuring Basket // What is basket - It will update the basket once user add something
+    //The destructuring assignment syntax is a JavaScript expression that makes it possible to unpack values from arrays, or properties from objects, into distinct variables
+    const [{basket}, dispatch] = useStateValue();
+
+    console.log(basket);
+
+    const addToBasket = () => {
+        //Dispatch the item into the data layer
+        dispatch({
+            type: 'ADD_TO_BASKET',
+            item: {
+                id: id,
+                title: title,
+                price: price,
+                rating: rating,
+                image: image
+            }
+        })
+    }
+
     return (
         <div className="product">
             <div className="product__info">
@@ -21,7 +44,7 @@ function Product({title, price, rating, image}) {
                 </div>
                 </div>
                 <img src={image} alt="" />
-                <button>Add to Basket</button>
+                <button onClick={addToBasket}>Add to Basket</button>
               
         </div>
     )
