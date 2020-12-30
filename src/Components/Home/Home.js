@@ -28,7 +28,8 @@ function Home() {
                     
                 </div>
                 <div className="home__row">
-                <Product title="The lean startup" price={29.99} image="https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._AC_SY400_.jpg" rating={4}/>
+                <Product style={{width: '100%'}} title="The lean startup" price={29.99} image="https://th.bing.com/th/id/OIP.rRRS_NvNJXUO4-yTU3SqpQHaEK?pid=Api&rs=1" rating={4}/>
+                <Product style={{width: '100%'}} title="The lean startup" price={29.99} image="https://th.bing.com/th/id/OIP.rRRS_NvNJXUO4-yTU3SqpQHaEK?pid=Api&rs=1" rating={4}/>
                 
                 </div>
             </div>
