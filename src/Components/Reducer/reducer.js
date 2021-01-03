@@ -23,9 +23,12 @@ const reducer = (state, action) => {
                 (basketIndex) => basketIndex.id === action.id
             )
 
+          
+            //Copying The whole basket- All item list
             let newBasket = [...state.basket]
 
             if (index >= 0) {
+                // splice - it will remove the item once we click remove
                 newBasket.splice(index, 1)
             }
             else{

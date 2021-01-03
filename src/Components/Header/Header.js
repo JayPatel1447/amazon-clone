@@ -15,22 +15,26 @@ function Header() {
             <Link to="/">
             <img className="header__logo"  src="https://pngimg.com/uploads/amazon/amazon_PNG11.png"/>
             </Link>
-           
-
             <div className="header__search">
                 <input className="header__searchInput" type="text"/>
                 <SearchIcon className="header__searchIcon" type="text"/>      
              </div>
 
             <div className="header__nav">
+               
+                
                 <div className="header__option">
                     <span className="header__optionLineOne">
                         Hello Guest
                     </span>
-                    <span className="header__optionLineTwo">
+                    <Link to="/login">
+                    <span style={{color: 'white'}} className="header__optionLineTwo">
                         Sign In
                     </span>
+                    </Link>
                 </div>
+
+                
                 <div className="header__option">
                 <span className="header__optionLineOne">
                         Returns
