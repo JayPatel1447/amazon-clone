@@ -1,9 +1,40 @@
-import React from 'react'
+import React, {useState} from 'react'
 import "./Login.css"
 
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
+import { auth  } from "../../firebase";
 
 function Login() {
+
+    const history = useHistory();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+
+    const signIn = (e) => {
+
+        e.preventDefault();
+        
+
+
+    }
+
+    const register = (e) => {
+        e.preventDefault();
+        
+        auth.createUserWithEmailAndPassword(email, password)
+            .then((auth) => {
+            //Successful
+            console.log(auth)
+            if (auth){
+                history.push('/');
+            }
+        })
+            .catch((e) => {
+                alert(e.message)})
+            
+            
+    }
     return (
         <div className="login">
             <Link to="/">
@@ -16,15 +47,17 @@ function Login() {
 
                     <form>
                         <h5>E-mail</h5>
-                        <input type='text'/>
+                        <input type='text' value={email} onChange={e => setEmail(e.target.value)}/>
 
                         <h5>Password</h5>
-                        <input type='password'/>
+                        <input type='password' value={password} onChange={e => setPassword(e.target.value)}/>
 
-                        <button className="login__signInButton">Sign In</button>
+                        {/* Button to SignIN*/}
+                        <button onClick={signIn} type='submit' className="login__signInButton">Sign In</button>
                     </form>
                     <p>By continuing, you agree to Amazon's Conditions of Use and Privacy Notice.</p>
-                    <button className="login__registerButton">Create your amazon account</button>
+
+                    <button onClick={register} className="login__registerButton">Create your amazon account</button>
             </div>
         </div>
     )
