@@ -15,8 +15,14 @@ function Login() {
 
         e.preventDefault();
         
+        auth.signInWithEmailAndPassword(email, password)
+            .then((auth) => {
+                history.push("/")
 
-
+            })
+            .catch((e) => {
+                alert(e.message)
+            })
     }
 
     const register = (e) => {
@@ -46,6 +52,8 @@ function Login() {
                     <h1>Sign in</h1>
 
                     <form>
+                        
+                       
                         <h5>E-mail</h5>
                         <input type='text' value={email} onChange={e => setEmail(e.target.value)}/>
 
