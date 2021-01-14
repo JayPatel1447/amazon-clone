@@ -28,19 +28,18 @@ function Header() {
              </div>
 
             <div className="header__nav">
-               
-                
+            <Link to={!user && '/login'} >
                 <div onClick={handleAuthentication} className="header__option">
                     <span className="header__optionLineOne">
                         {user ? user.email : 'Hello Guest'}
                     </span>
-                    <Link to="/login">
+                    
                     <span style={{color: 'white'}} className="header__optionLineTwo">
                         {user ? 'Sign Out' : 'Sign In'}
                     </span>
-                    </Link>
+                   
                 </div>
-
+                </Link>
                 
                 <div className="header__option">
                 <span className="header__optionLineOne">
