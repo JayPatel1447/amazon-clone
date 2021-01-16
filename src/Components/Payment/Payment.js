@@ -1,18 +1,20 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect } from 'react'
 import "./Payment.css"
 
 import {useStateValue} from "../StateProvider/StateProvider"
 import CheckoutProduct from '../Checkout/CheckoutProduct';
 import {CardElement, useStripe, useElements} from "@stripe/react-stripe-js"
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 
 import CurrencyFormat from 'react-currency-format'
 import {getBasketTotal} from "../Reducer/reducer"
+import axios from "../axios"
 
 function Payment() {
 
     const [{basket, user}, dispatch] = useStateValue();
 
+    const history = useHistory();
     const stripe = useStripe();
     const elements  = useElements();
 
@@ -27,7 +29,7 @@ function Payment() {
         const getClientSecret = async () => {
             const response  = await axios ({
                 method: 'post',
-                url: `/payment/create?total=${getBasketTotal(basket) * 100}`
+                url: `/payments/create?total=${getBasketTotal(basket) * 100}`
             });
 
             setClientSecret(response.data.clientSecret)
@@ -35,20 +37,34 @@ function Payment() {
         getClientSecret();
     }, [basket])
 
+    console.log("The Secret is : ",clientSecret)
+
     const handleSubmit = async(e) => {
         //This will stop refreshing
         e.preventDefault();
-        //This will stop alow clicking button for number of time at a time. Real time payment process system 
+        //This will stop allow clicking button for number of time at a time. Real time payment process system 
         setProcessing(true);
 
         const payload = await stripe.confirmCardPayment(clientSecret, {
             payment_method: {
                 card: elements.getElement(CardElement)
             }
+        }).then(({ paymentIntent }) => {
+            //paymentIntent = payment Confirmation
+            //Once the process is done
+            setSucceeded(true);
+            setError(null);
+            setProcessing(false);
+
+            //router.replace acts like router.push, the only difference is
+            // that it navigates without pushing a new history entry, as its name suggests - it replaces the current entry.
+            history.replace("/orders")
+
+
         })
 
 
-        const payload = await stripe
+      
 
 
 
