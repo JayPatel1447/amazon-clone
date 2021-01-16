@@ -3,10 +3,18 @@ import './App.css';
 import Header from "./Components/Header/Header"
 import Home from "./Components/Home/Home"
 import Checkout from "./Components/Checkout/Checkout"
+import Payment from "./Components/Payment/Payment"
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import Login from './Components/Login/Login';
 import {useStateValue} from "../src/Components/StateProvider/StateProvider"
 import {auth} from "./firebase"
+
+
+import {Elements} from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js';
+
+const promise = loadStripe('pk_test_51I9gAMKlXYLW2ZmfqLeQKyegHHcaqUNCmwmsmADjw2hfgiCtBTDn5xbP56dDhQYFU7TZ7Yy2wCEsRqm1VDC1nB3000QrQPvRZk');
+
 
 function App() {
 
@@ -53,6 +61,14 @@ function App() {
           <Header />
           <Checkout />
         </Route>
+          {/* Payment Page */}
+          <Route path="/payment"> 
+          <Header />
+          <Elements stripe={promise}>
+             <Payment />
+          </Elements>
+        </Route>
+
 
         {/* Home Page and Home page "/" must be wrriten at last otherwise it will catch word after / as a deafult one. So will render this lines*/}
         <Route path="/">
